@@ -35,6 +35,10 @@ with c2:
             "images/logo.png",
             width=200,
         )
+with st.sidebar:
+   st.subheader("Credit: Sweephy.com")
+   st.text("No-code data preparing, cleaning and ML platform")
+   st.text("Contact: info@sweephy.com")
 
 
 def check_email_domain(domain):
