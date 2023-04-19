@@ -144,7 +144,7 @@ with tab2:
 
         result = get_values(column_names)
         st.success('Operation is done! You can download flagged CSV file.', icon="✅")
-
+        st.bar_chart(df)
 
     c29, c30, c31 = st.columns([1, 1, 2])
 
