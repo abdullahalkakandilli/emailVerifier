@@ -106,9 +106,14 @@ with tab2:
     def get_values(column_name):
         progress_text = "Operation in progress. Please wait."
         my_bar = st.progress(0, text=progress_text)
+        total_rows = len(df)
+        progress_step = 1 / total_rows
+        progress_value = 0
         for index, row in df.iterrows():
             time.sleep(0.1)
-            my_bar.progress(index + 1, text=progress_text)
+            progress_value += progress_step
+            my_bar.progress(progress_value,text=progress_text)
+
             email = row[column_name]
 
             domain = email.split('@')[1]
