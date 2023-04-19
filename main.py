@@ -43,8 +43,8 @@ def check_email_domain(domain):
         return True if records else False
     except dns.resolver.NXDOMAIN:
         return False
-tab1, tab2 = st.tabs(["CSV Email Verifier", "One Email Verifier"])
-with tab2:
+tab1, tab2, tab3 = st.tabs(["CSV Email Verifier", "Excel Email Verifier", "One Email"])
+with tab3:
 
     def get_values(email):
 
@@ -137,6 +137,85 @@ with tab1:
                 df.loc[index, "Verification"] = "Invalid"
 
     form2 = st.form(key="annotation2")
+    with form2:
+
+        column_names = st.selectbox(
+            "Please Select Email Column:", list(df.columns)
+        )
+        submitted = st.form_submit_button(label="Submit")
+
+    if submitted:
+
+        result = get_values(column_names)
+        st.success('Operation is done! You can download flagged CSV file.', icon="✅")
+
+    c29, c30, c31 = st.columns([1, 1, 2])
+
+    with c29:
+        CSVButton = download_button(
+            df,
+            "FlaggedFile.csv",
+            "Download to CSV",
+        )
+
+with tab2:
+    st.header('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
+    st.text("To start, please upload a CSV file and select the _Email_ column.")
+    uploaded_file = st.file_uploader(
+        " ",
+        type="Excel",
+        key="1",
+        help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
+    )
+
+    if uploaded_file is not None:
+        df = pd.read_excel(uploaded_file)
+        uploaded_file.seek(0)
+
+
+        file_container = st.expander("Check your uploaded .csv")
+        file_container.write(df)
+
+    else:
+        st.info(
+            f"""
+                👆 Upload a Excel file first.
+                """
+        )
+
+
+
+
+    def get_values(column_name):
+        progress_text = "Operation in progress. Please wait."
+        my_bar = st.progress(0, text=progress_text)
+        total_rows = len(df)
+        progress_step = 1 / total_rows
+        progress_value = 0
+        for index, row in df.iterrows():
+
+            progress_value += progress_step
+            my_bar.progress(progress_value,text=progress_text)
+
+            email = row[column_name]
+
+            domain = email.split('@')[1]
+            domain_valid = check_email_domain(domain)
+
+            email_valid = validate_email(email)
+
+
+            if domain_valid == True and email_valid == True:
+                df.loc[index, "Domain"] = "Valid"
+                df.loc[index, "Valid Check"] = "Valid"
+
+            elif domain_valid == True and email_valid == False:
+                df.loc[index, "Domain"] = "Valid"
+                df.loc[index, "Valid Check"] = "Invalid"
+            else:
+                df.loc[index, "Verification"] = "Invalid"
+
+    form2 = st.form(key="annotation3")
     with form2:
 
         column_names = st.selectbox(
