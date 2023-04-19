@@ -110,7 +110,7 @@ with tab2:
         progress_step = 1 / total_rows
         progress_value = 0
         for index, row in df.iterrows():
-            time.sleep(0.1)
+
             progress_value += progress_step
             my_bar.progress(progress_value,text=progress_text)
 
