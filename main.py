@@ -69,14 +69,14 @@ with tab3:
 
 
         if domain_valid == True and email_valid == True:
-            result = "Domain is valid and email is validated"
+            result = "Domain is valid and email is validated :smiley:"
             return result
 
         elif domain_valid == True and email_valid == False:
-            result = "Domain is valid and email is not validated"
+            result = "Domain is valid and email is not validated :sad:"
             return result
         else:
-            result = "Domain is not valid and email is not validated"
+            result = "Domain is not valid and email is not validated :sad:"
             return result
 
     form1 = st.form(key="annotation")
@@ -92,7 +92,7 @@ with tab3:
     c29, c30, c31 = st.columns([1, 1, 2])
 
     with c29:
-        st.write(result)
+        st.info(result)
 
 with tab1:
     st.subheader('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
