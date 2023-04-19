@@ -86,6 +86,7 @@ with tab1:
     uploaded_file = st.file_uploader(
         " ",
         key="1",
+        type="CSV",
         help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
     )
 
@@ -160,7 +161,7 @@ with tab1:
 
 with tab2:
     st.header('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
-    st.text("To start, please upload a CSV file and select the _Email_ column.")
+    st.text("To start, please upload an Excel file and select the _Email_ column.")
     uploaded_file = st.file_uploader(
         " ",
         type="Excel",
