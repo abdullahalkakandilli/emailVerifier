@@ -104,6 +104,8 @@ with tab2:
 
 
     def get_values(column_name):
+        progress_text = "Operation in progress. Please wait."
+        my_bar = st.progress(0, text=progress_text)
         for index, row in df.iterrows():
 
             email = row[column_name]
