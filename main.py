@@ -74,7 +74,7 @@ with tab1:
     c29, c30, c31 = st.columns([1, 1, 2])
 
     with c29:
-        st.write()
+        st.write(get_values())
 
 with tab2:
     uploaded_file = st.file_uploader(
