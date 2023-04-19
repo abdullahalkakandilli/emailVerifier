@@ -56,7 +56,17 @@ else:
     )
 
 
-
+def is_domain_provider_google(domain):
+    try:
+        domain_info = whois.whois(domain)
+        st.write(domain_info)
+        if domain_info.registrar:
+            return 'google' in domain_info.registrar.lower()
+        else:
+            return False
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
@@ -70,6 +80,8 @@ def get_values(column_name):
 
         domain = email.split('@')[1]
         domain_valid = check_email_domain(domain)
+        google_domain = is_domain_provider_google(domain)
+        st.write(google_domain)
         email_valid = validate_email(email)
         st.write(domain)
 
