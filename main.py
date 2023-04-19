@@ -65,16 +65,12 @@ def check_email_domain(domain):
         return False
 def get_values(column_name):
     for index, row in df.iterrows():
-        try:
-            email = row[column_name]
 
-            domain = email.split('@')[1]
-            domain_valid = check_email_domain(domain)
-            st.write(email)
-            email_valid = validate_email(email)
-            st.write(email_valid)
-        except Exception as e:
-            st.write(e)
+        email = row[column_name]
+
+        domain = email.split('@')[1]
+        domain_valid = check_email_domain(domain)
+        email_valid = validate_email(email)
 
         if domain_valid == True and email_valid == True:
             df.loc[index, "Verification"] = "Valid"
