@@ -147,7 +147,7 @@ with tab2:
     c29, c30, c31 = st.columns([1, 1, 2])
 
     with c29:
-
+        st.success('Operation is done! You can download flagged CSV file.', icon="✅")
         CSVButton = download_button(
             df,
             "FlaggedFile.csv",
