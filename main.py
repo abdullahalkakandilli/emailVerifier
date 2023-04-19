@@ -18,7 +18,7 @@ def _max_width_():
         unsafe_allow_html=True,
     )
 
-st.set_page_config(page_icon="images/logo.png", page_title="Logo or Not Logo")
+st.set_page_config(page_icon="images/logo.png", page_title="Email Verifier")
 
 
 c2, c3 = st.columns([6, 1])
@@ -28,7 +28,7 @@ with c2:
     c31, c32 = st.columns([12, 2])
     with c31:
         st.caption("")
-        st.title("Logo or Not Logo")
+        st.title("Email Verifier")
     with c32:
         st.image(
             "images/logo.png",
@@ -68,10 +68,12 @@ def get_values(column_names):
     for index, row in df.iterrows():
         email = row[column_names]
         domain = email.split('@')[1]
-        if check_email_domain(domain) and validate_email(email):
+        domain_valid = check_email_domain(domain)
+        email_valid = validate_email(email)
+        if domain_valid == True and email_valid == True:
             df.loc[index, "Verification"] = "Valid"
 
-        elif check_email_domain(domain) == True and validate_email(email) == False:
+        elif domain_valid == True and email_valid == False:
             df.loc[index, "Verification"] = "Not sure"
         else:
             df.loc[index, "Verification"] = "Invalid"
