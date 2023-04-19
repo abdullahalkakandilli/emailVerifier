@@ -6,6 +6,7 @@ from functionforDownloadButtons import download_button
 import re
 df = pd.DataFrame()
 result = ""
+email_column = None
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
     st.markdown(
@@ -21,12 +22,8 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/logo.png", page_title="Email Verifier")
 
-
 c2, c3 = st.columns([6, 1])
 
-def is_email(string):
-    email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-    return bool(re.match(email_regex, string))
 with c2:
     c31, c32 = st.columns([12, 2])
     with c31:
@@ -37,6 +34,10 @@ with c2:
             "images/logo.png",
             width=200,
         )
+
+def is_email(string):
+    email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return bool(re.match(email_regex, string))
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
@@ -90,6 +91,9 @@ with tab2:
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         uploaded_file.seek(0)
+        for column in df.columns:
+            if df[column].apply(is_email).all():
+                email_column = column
 
 
         file_container = st.expander("Check your uploaded .csv")
@@ -101,9 +105,6 @@ with tab2:
                 👆 Upload a .csv file first.
                 """
         )
-
-
-
 
     def get_values(column_name):
         for index, row in df.iterrows():
@@ -128,10 +129,7 @@ with tab2:
 
     form2 = st.form(key="annotation2")
     with form2:
-        for column in df.columns:
-            if df[column].apply(is_email).all():
-                email_column = column
-                break
+
         column_names = st.selectbox(
             "Please Select Email Column:", list(df.columns)
         )
