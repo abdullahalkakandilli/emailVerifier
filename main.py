@@ -95,7 +95,7 @@ with tab2:
             if is_email(column):
 
                 email_column = column
-
+                st.write(email_column)
 
         file_container = st.expander("Check your uploaded .csv")
         file_container.write(df)
