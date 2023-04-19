@@ -75,7 +75,7 @@ def get_values(column_name):
         if domain_valid == True and email_valid == True:
             df.loc[index, "Verification"] = "Valid"
 
-        elif domain_valid == True and email_valid == False:
+        elif domain_valid == True and domain != "google.com" and email_valid == False:
             df.loc[index, "Verification"] = "Not sure"
         else:
             df.loc[index, "Verification"] = "Invalid"
