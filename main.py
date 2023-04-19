@@ -36,7 +36,7 @@ with c2:
             width=200,
         )
 
-st.text('To start, please upload a CSV file which includes Emails and select the Email column')
+
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
