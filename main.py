@@ -61,8 +61,8 @@ with tab1:
             result = "Domain is not valid and email is not validated"
             return result
 
-    form = st.form(key="annotation")
-    with form:
+    form1 = st.form(key="annotation")
+    with form1:
 
         text = st.text_input("Please enter an email")
         submitted = st.form_submit_button(label="Submit")
@@ -122,8 +122,8 @@ with tab2:
             else:
                 df.loc[index, "Verification"] = "Invalid"
 
-    form = st.form(key="annotation")
-    with form:
+    form2 = st.form(key="annotation")
+    with form2:
 
         column_names = st.selectbox(
             "Please Select Email Column:", list(df.columns)
