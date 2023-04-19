@@ -5,7 +5,7 @@ import pandas as pd
 from functionforDownloadButtons import download_button
 import time
 df = pd.DataFrame()
-result = ""
+result = "Your answer will appear here "
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
     st.markdown(
@@ -69,14 +69,14 @@ with tab3:
 
 
         if domain_valid == True and email_valid == True:
-            result = "Domain is valid and email is validated :smiley:"
+            result = "Domain is valid and email is validated"
             return result
 
         elif domain_valid == True and email_valid == False:
-            result = "Domain is valid and email is not validated :sad:"
+            result = "Domain is valid and email is not validated"
             return result
         else:
-            result = "Domain is not valid and email is not validated :sad:"
+            result = "Domain is not valid and email is not validated"
             return result
 
     form1 = st.form(key="annotation")
