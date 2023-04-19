@@ -3,10 +3,9 @@ import dns.resolver
 import streamlit as st
 import pandas as pd
 from functionforDownloadButtons import download_button
-import re
+
 df = pd.DataFrame()
 result = ""
-email_column = None
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
     st.markdown(
@@ -22,7 +21,9 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/logo.png", page_title="Email Verifier")
 
+
 c2, c3 = st.columns([6, 1])
+
 
 with c2:
     c31, c32 = st.columns([12, 2])
@@ -34,10 +35,6 @@ with c2:
             "images/logo.png",
             width=200,
         )
-
-def is_email(string):
-    email_regex = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-    return bool(re.match(email_regex, string))
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
@@ -91,11 +88,7 @@ with tab2:
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         uploaded_file.seek(0)
-        for column in df.columns:
-            if is_email(column):
 
-                email_column = column
-                st.write(email_column)
 
         file_container = st.expander("Check your uploaded .csv")
         file_container.write(df)
@@ -106,6 +99,9 @@ with tab2:
                 👆 Upload a .csv file first.
                 """
         )
+
+
+
 
     def get_values(column_name):
         for index, row in df.iterrows():
@@ -138,7 +134,7 @@ with tab2:
 
     if submitted:
 
-        result = get_values(email_column)
+        result = get_values(column_names)
 
     c29, c30, c31 = st.columns([1, 1, 2])
 
