@@ -33,40 +33,16 @@ with c2:
             "images/logo.png",
             width=200,
         )
-
-uploaded_file = st.file_uploader(
-    " ",
-    key="1",
-    help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
-)
-
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    uploaded_file.seek(0)
-
-
-    file_container = st.expander("Check your uploaded .csv")
-    file_container.write(df)
-
-else:
-    st.info(
-        f"""
-            👆 Upload a .csv file first.
-            """
-    )
-
-
-
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
         return True if records else False
     except dns.resolver.NXDOMAIN:
         return False
-def get_values(column_name):
-    for index, row in df.iterrows():
+tab1, tab2 = st.tabs(["One Email Verifier", "CSV Email Verifier"])
+with tab1:
 
-        email = row[column_name]
+    def get_values(email):
 
         domain = email.split('@')[1]
         domain_valid = check_email_domain(domain)
@@ -75,33 +51,95 @@ def get_values(column_name):
 
 
         if domain_valid == True and email_valid == True:
-            df.loc[index, "Domain"] = "Valid"
-            df.loc[index, "Valid Check"] = "Valid"
+            result = "Domain is valid and email is validated"
+            return result
 
         elif domain_valid == True and email_valid == False:
-            df.loc[index, "Domain"] = "Valid"
-            df.loc[index, "Valid Check"] = "Invalid"
+            result = "Domain is valid and email is not validated"
+            return result
         else:
-            df.loc[index, "Verification"] = "Invalid"
+            result = "Domain is not valid and email is not validated"
+            return result
 
-form = st.form(key="annotation")
-with form:
+    form = st.form(key="annotation")
+    with form:
 
-    column_names = st.selectbox(
-        "Please Select Email Column:", list(df.columns)
+        text = st.text_input("Please enter an email")
+        submitted = st.form_submit_button(label="Submit")
+
+    if submitted:
+
+        result = get_values(text)
+
+    c29, c30, c31 = st.columns([1, 1, 2])
+
+    with c29:
+        st.write()
+
+with tab2:
+    uploaded_file = st.file_uploader(
+        " ",
+        key="1",
+        help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
     )
-    submitted = st.form_submit_button(label="Submit")
 
-if submitted:
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        uploaded_file.seek(0)
 
-    result = get_values(column_names)
 
-c29, c30, c31 = st.columns([1, 1, 2])
+        file_container = st.expander("Check your uploaded .csv")
+        file_container.write(df)
 
-with c29:
+    else:
+        st.info(
+            f"""
+                👆 Upload a .csv file first.
+                """
+        )
 
-    CSVButton = download_button(
-        df,
-        "FlaggedFile.csv",
-        "Download to CSV",
-    )
+
+
+
+    def get_values(column_name):
+        for index, row in df.iterrows():
+
+            email = row[column_name]
+
+            domain = email.split('@')[1]
+            domain_valid = check_email_domain(domain)
+
+            email_valid = validate_email(email)
+
+
+            if domain_valid == True and email_valid == True:
+                df.loc[index, "Domain"] = "Valid"
+                df.loc[index, "Valid Check"] = "Valid"
+
+            elif domain_valid == True and email_valid == False:
+                df.loc[index, "Domain"] = "Valid"
+                df.loc[index, "Valid Check"] = "Invalid"
+            else:
+                df.loc[index, "Verification"] = "Invalid"
+
+    form = st.form(key="annotation")
+    with form:
+
+        column_names = st.selectbox(
+            "Please Select Email Column:", list(df.columns)
+        )
+        submitted = st.form_submit_button(label="Submit")
+
+    if submitted:
+
+        result = get_values(column_names)
+
+    c29, c30, c31 = st.columns([1, 1, 2])
+
+    with c29:
+
+        CSVButton = download_button(
+            df,
+            "FlaggedFile.csv",
+            "Download to CSV",
+        )
