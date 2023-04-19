@@ -71,6 +71,7 @@ def get_values(column_name):
         domain = email.split('@')[1]
         domain_valid = check_email_domain(domain)
         email_valid = validate_email(email)
+        st.write(domain)
         if domain != "google.com":
             if domain_valid == True and email_valid == True:
                 df.loc[index, "Verification"] = "Valid"
