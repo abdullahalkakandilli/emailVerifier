@@ -93,6 +93,7 @@ with tab2:
         uploaded_file.seek(0)
         for column in df.columns:
             if is_email(column):
+
                 email_column = column
 
 
