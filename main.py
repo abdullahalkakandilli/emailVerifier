@@ -122,7 +122,7 @@ with tab2:
             else:
                 df.loc[index, "Verification"] = "Invalid"
 
-    form2 = st.form(key="annotation")
+    form2 = st.form(key="annotation2")
     with form2:
 
         column_names = st.selectbox(
