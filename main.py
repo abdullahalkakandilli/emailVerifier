@@ -42,7 +42,7 @@ def check_email_domain(domain):
     except dns.resolver.NXDOMAIN:
         return False
 tab1, tab2 = st.tabs(["One Email Verifier", "CSV Email Verifier"])
-with tab1:
+with tab2:
 
     def get_values(email):
 
@@ -78,7 +78,7 @@ with tab1:
     with c29:
         st.write(result)
 
-with tab2:
+with tab1:
     uploaded_file = st.file_uploader(
         " ",
         key="1",
@@ -144,7 +144,6 @@ with tab2:
 
         result = get_values(column_names)
         st.success('Operation is done! You can download flagged CSV file.', icon="✅")
-        st.bar_chart(df)
 
     c29, c30, c31 = st.columns([1, 1, 2])
 
