@@ -82,6 +82,7 @@ def get_values(column_name):
         google_domain = is_domain_provider_google(domain)
         email_valid = validate_email(email)
         st.write(domain)
+        st.write(google_domain)
         if google_domain:
             if email_valid == False:
                 df.loc[index, "Verification"] = "Invalid"
