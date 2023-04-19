@@ -92,7 +92,7 @@ with tab2:
         df = pd.read_csv(uploaded_file)
         uploaded_file.seek(0)
         for column in df.columns:
-            if df[column].apply(is_email).all():
+            if is_email(column):
                 email_column = column
 
 
