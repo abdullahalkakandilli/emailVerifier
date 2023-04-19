@@ -19,7 +19,7 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/logo.png", page_title="Email Verifier")
 
-
+df = pd.DataFrame()
 c2, c3 = st.columns([6, 1])
 
 
@@ -72,8 +72,7 @@ def get_values(column_name):
         domain_valid = check_email_domain(domain)
 
         email_valid = validate_email(email)
-        st.write(email)
-        st.write(email_valid)
+
 
         if domain_valid == True and email_valid == True:
             df.loc[index, "Domain"] = "Valid"
