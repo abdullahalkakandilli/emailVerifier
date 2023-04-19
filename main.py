@@ -164,7 +164,7 @@ with tab2:
     st.text("To start, please upload an Excel file and select the _Email_ column.")
     uploaded_file = st.file_uploader(
         " ",
-        type="xlxs",
+        type="xlsx",
         key="2",
         help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
     )
