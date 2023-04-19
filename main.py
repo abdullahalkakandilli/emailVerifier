@@ -73,10 +73,10 @@ with tab3:
             return result
 
         elif domain_valid == True and email_valid == False:
-            result = "Domain is valid and email is not validated"
+            result = "Domain is valid and email is NOT validated"
             return result
         else:
-            result = "Domain is not valid and email is not validated"
+            result = "Domain is not valid and email is NOT validated"
             return result
 
     form1 = st.form(key="annotation")
