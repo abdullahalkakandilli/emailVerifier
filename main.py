@@ -164,7 +164,7 @@ with tab2:
     uploaded_file = st.file_uploader(
         " ",
         type="Excel",
-        key="1",
+        key="2",
         help="To activate 'wide mode', go to the hamburger menu > Settings > turn on 'wide mode'",
     )
 
