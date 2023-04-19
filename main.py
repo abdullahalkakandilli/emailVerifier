@@ -3,7 +3,9 @@ import dns.resolver
 import streamlit as st
 import pandas as pd
 from functionforDownloadButtons import download_button
-import whois
+
+df = pd.DataFrame()
+result = ""
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
     st.markdown(
@@ -19,7 +21,7 @@ def _max_width_():
 
 st.set_page_config(page_icon="images/logo.png", page_title="Email Verifier")
 
-df = pd.DataFrame()
+
 c2, c3 = st.columns([6, 1])
 
 
