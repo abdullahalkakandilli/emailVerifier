@@ -45,7 +45,8 @@ def check_email_domain(domain):
         return False
 tab1, tab2 = st.tabs(["One Email Verifier", "CSV Email Verifier"])
 with tab2:
-
+    st.header('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
+    st.text("To start, please upload a CSV file.")
     def get_values(email):
 
         domain = email.split('@')[1]
