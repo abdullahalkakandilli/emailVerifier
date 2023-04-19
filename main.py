@@ -89,10 +89,7 @@ with tab3:
 
         result = get_values(text)
 
-    c29, c30, c31 = st.columns([1, 1, 2])
-
-    with c29:
-        st.info(result)
+    st.info(result + " :star:")
 
 with tab1:
     st.subheader('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
