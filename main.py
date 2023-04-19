@@ -3,9 +3,6 @@ import dns.resolver
 import streamlit as st
 import pandas as pd
 from functionforDownloadButtons import download_button
-import requests
-
-
 
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
