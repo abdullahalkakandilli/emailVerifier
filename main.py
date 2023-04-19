@@ -59,7 +59,6 @@ else:
 def is_domain_provider_google(domain):
     try:
         domain_info = whois.whois(domain)
-        st.write(domain_info)
         if domain_info.registrar:
             return 'google' in domain_info.registrar.lower()
         else:
@@ -86,10 +85,12 @@ def get_values(column_name):
         st.write(domain)
 
         if domain_valid == True and email_valid == True:
-            df.loc[index, "Verification"] = "Valid"
+            df.loc[index, "Domain"] = "Valid"
+            df.loc[index, "Valid Check"] = "Valid"
 
         elif domain_valid == True and email_valid == False:
-            df.loc[index, "Verification"] = "Not sure"
+            df.loc[index, "Domain"] = "Not sure"
+            df.loc[index, "Valid Check"] = "Invalid"
         else:
             df.loc[index, "Verification"] = "Invalid"
 
