@@ -39,6 +39,15 @@ with st.sidebar:
    st.subheader("Credit: Sweephy.com")
    st.caption("No-code data preparing, cleaning and ML platform")
    st.caption("Contact: info@sweephy.com")
+   st.divider()
+   st.text("Check other free tools")
+   st.text("[Data Profiling] (https://upcoming.sweephy.com/profiling/)")
+   st.text("[Text Classification] (https://upcoming.sweephy.com/text-classification/)")
+   st.text("[Data Visualization] (https://upcoming.sweephy.com/text-classification/)")
+   st.info(f"""
+            👆 Check all other [ML modules](https://www.sweephy.com/module-integrations)
+            """
+           )
 
 
 def check_email_domain(domain):
