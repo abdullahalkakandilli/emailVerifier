@@ -71,15 +71,17 @@ def get_values(column_name):
         domain = email.split('@')[1]
         domain_valid = check_email_domain(domain)
         email_valid = validate_email(email)
+        if domain != "google.com":
+            if domain_valid == True and email_valid == True:
+                df.loc[index, "Verification"] = "Valid"
 
-        if domain_valid == True and email_valid == True:
-            df.loc[index, "Verification"] = "Valid"
-
-        elif domain_valid == True and domain != "google.com" and email_valid == False:
-            df.loc[index, "Verification"] = "Not sure"
+            elif domain_valid == True and email_valid == False:
+                df.loc[index, "Verification"] = "Not sure"
+            else:
+                df.loc[index, "Verification"] = "Invalid"
         else:
-            df.loc[index, "Verification"] = "Invalid"
-
+            if email_valid == False:
+                df.loc[index, "Verification"] = "Invalid"
 form = st.form(key="annotation")
 with form:
 
