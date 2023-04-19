@@ -41,9 +41,9 @@ with st.sidebar:
    st.caption("Contact: info@sweephy.com")
    st.divider()
    st.subheader("Check other free tools")
-   st.text(f"""[Data Profiling](https://upcoming.sweephy.com/profiling)""")
-   st.text(f"""[Text Classification](https://upcoming.sweephy.com/text-classification)""")
-   st.text(f"""[Data Visualization](https://upcoming.sweephy.com/text-classification)""")
+   st.write("[Data Profiling](https://upcoming.sweephy.com/profiling)")
+   st.write("[Text Classification](https://upcoming.sweephy.com/text-classification)")
+   st.write("[Data Visualization](https://upcoming.sweephy.com/text-classification)")
    st.info(f"""
             👆 Check all other [ML modules](https://www.sweephy.com/module-integrations)
             """
