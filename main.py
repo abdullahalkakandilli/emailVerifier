@@ -3,7 +3,7 @@ import dns.resolver
 import streamlit as st
 import pandas as pd
 from functionforDownloadButtons import download_button
-
+import whois
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
     st.markdown(
@@ -56,7 +56,16 @@ else:
     )
 
 
-
+def is_domain_provider_google(domain):
+    try:
+        domain_info = whois.whois(domain)
+        if domain_info.registrar:
+            return 'google' in domain_info.registrar.lower()
+        else:
+            return False
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
@@ -70,9 +79,13 @@ def get_values(column_name):
 
         domain = email.split('@')[1]
         domain_valid = check_email_domain(domain)
+        google_domain = is_domain_provider_google(domain)
         email_valid = validate_email(email)
         st.write(domain)
-        if domain != "google.com":
+        if google_domain:
+            if email_valid == False:
+                df.loc[index, "Verification"] = "Invalid"
+        else:
             if domain_valid == True and email_valid == True:
                 df.loc[index, "Verification"] = "Valid"
 
@@ -80,9 +93,7 @@ def get_values(column_name):
                 df.loc[index, "Verification"] = "Not sure"
             else:
                 df.loc[index, "Verification"] = "Invalid"
-        else:
-            if email_valid == False:
-                df.loc[index, "Verification"] = "Invalid"
+
 form = st.form(key="annotation")
 with form:
 
