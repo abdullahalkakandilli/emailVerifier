@@ -35,6 +35,8 @@ with c2:
             "images/logo.png",
             width=200,
         )
+st.subheader('Welcome to :purple[Sweephy] _Email Verifier_ :smile:')
+st.text('To start, please upload a CSV file which includes Emails and please select the :purple[Email] column')
 def check_email_domain(domain):
     try:
         records = dns.resolver.resolve(domain, 'MX')
