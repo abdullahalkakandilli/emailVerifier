@@ -1,9 +1,11 @@
 from validate_email import validate_email
 import dns.resolver
-import requests
 import streamlit as st
 import pandas as pd
 from functionforDownloadButtons import download_button
+import requests
+
+
 
 def _max_width_():
     max_width_str = f"max-width: 1800px;"
@@ -56,7 +58,7 @@ else:
             """
     )
 
-    st.stop()
+
 
 def check_email_domain(domain):
     try:
@@ -64,14 +66,19 @@ def check_email_domain(domain):
         return True if records else False
     except dns.resolver.NXDOMAIN:
         return False
-def get_values(column_names):
+def get_values(column_name):
     for index, row in df.iterrows():
-        email = row[column_names]
-        domain = email.split('@')[1]
-        domain_valid = check_email_domain(domain)
-        st.write(email)
-        email_valid = validate_email(email)
-        st.write(email_valid)
+        try:
+            email = row[column_name]
+
+            domain = email.split('@')[1]
+            domain_valid = check_email_domain(domain)
+            st.write(email)
+            email_valid = validate_email(email)
+            st.write(email_valid)
+        except Exception as e:
+            st.write(e)
+
         if domain_valid == True and email_valid == True:
             df.loc[index, "Verification"] = "Valid"
 
