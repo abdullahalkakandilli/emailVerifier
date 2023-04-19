@@ -3,7 +3,7 @@ import dns.resolver
 import streamlit as st
 import pandas as pd
 from functionforDownloadButtons import download_button
-
+import time
 df = pd.DataFrame()
 result = ""
 def _max_width_():
@@ -107,7 +107,8 @@ with tab2:
         progress_text = "Operation in progress. Please wait."
         my_bar = st.progress(0, text=progress_text)
         for index, row in df.iterrows():
-
+            time.sleep(0.1)
+            my_bar.progress(index + 1, text=progress_text)
             email = row[column_name]
 
             domain = email.split('@')[1]
