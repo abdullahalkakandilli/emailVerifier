@@ -88,7 +88,7 @@ form = st.form(key="annotation")
 with form:
 
     column_names = st.selectbox(
-        "Column name:", list(df.columns)
+        "Please Select Email Column:", list(df.columns)
     )
     submitted = st.form_submit_button(label="Submit")
 
