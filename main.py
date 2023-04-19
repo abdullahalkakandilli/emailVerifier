@@ -37,8 +37,8 @@ with c2:
         )
 with st.sidebar:
    st.subheader("Credit: Sweephy.com")
-   st.text("No-code data preparing, cleaning and ML platform")
-   st.text("Contact: info@sweephy.com")
+   st.caption("No-code data preparing, cleaning and ML platform")
+   st.caption("Contact: info@sweephy.com")
 
 
 def check_email_domain(domain):
