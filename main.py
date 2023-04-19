@@ -43,10 +43,9 @@ def check_email_domain(domain):
         return True if records else False
     except dns.resolver.NXDOMAIN:
         return False
-tab1, tab2 = st.tabs(["One Email Verifier", "CSV Email Verifier"])
+tab1, tab2 = st.tabs(["CSV Email Verifier", "One Email Verifier"])
 with tab2:
-    st.header('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
-    st.text("To start, please upload a CSV file.")
+
     def get_values(email):
 
         domain = email.split('@')[1]
@@ -82,6 +81,8 @@ with tab2:
         st.write(result)
 
 with tab1:
+    st.header('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
+    st.text("To start, please upload a CSV file.")
     uploaded_file = st.file_uploader(
         " ",
         key="1",
