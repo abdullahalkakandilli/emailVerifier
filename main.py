@@ -61,23 +61,27 @@ with tab3:
     st.subheader('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
     st.text("To start, please write an _Email_.")
     def get_values(email):
+        try:
+            domain = email.split('@')[1]
+            domain_valid = check_email_domain(domain)
 
-        domain = email.split('@')[1]
-        domain_valid = check_email_domain(domain)
-
-        email_valid = validate_email(email)
+            email_valid = validate_email(email)
 
 
-        if domain_valid == True and email_valid == True:
-            result = "Domain is valid and email is validated"
-            return result
+            if domain_valid == True and email_valid == True:
+                result = "Domain is valid and email is validated"
+                return result
 
-        elif domain_valid == True and email_valid == False:
-            result = "Domain is valid and email is NOT validated"
-            return result
-        else:
-            result = "Domain is not valid and email is NOT validated"
-            return result
+            elif domain_valid == True and email_valid == False:
+                result = "Domain is valid and email is NOT validated"
+                return result
+            else:
+                result = "Domain is not valid and email is NOT validated"
+                return result
+        except:
+
+            st.error('Please enter a valid email!')
+
 
     form1 = st.form(key="annotation")
     with form1:
@@ -126,27 +130,29 @@ with tab1:
         progress_step = 1 / total_rows
         progress_value = 0
         for index, row in df.iterrows():
+            try:
+                progress_value += progress_step
+                my_bar.progress(progress_value,text=progress_text)
 
-            progress_value += progress_step
-            my_bar.progress(progress_value,text=progress_text)
+                email = row[column_name]
 
-            email = row[column_name]
+                domain = email.split('@')[1]
+                domain_valid = check_email_domain(domain)
 
-            domain = email.split('@')[1]
-            domain_valid = check_email_domain(domain)
-
-            email_valid = validate_email(email)
+                email_valid = validate_email(email)
 
 
-            if domain_valid == True and email_valid == True:
-                df.loc[index, "Domain"] = "Valid"
-                df.loc[index, "Valid Check"] = "Valid"
+                if domain_valid == True and email_valid == True:
+                    df.loc[index, "Domain"] = "Valid"
+                    df.loc[index, "Valid Check"] = "Valid"
 
-            elif domain_valid == True and email_valid == False:
-                df.loc[index, "Domain"] = "Valid"
-                df.loc[index, "Valid Check"] = "Invalid"
-            else:
-                df.loc[index, "Verification"] = "Invalid"
+                elif domain_valid == True and email_valid == False:
+                    df.loc[index, "Domain"] = "Valid"
+                    df.loc[index, "Valid Check"] = "Invalid"
+                else:
+                    df.loc[index, "Verification"] = "Invalid"
+            except:
+                continue
 
     form2 = st.form(key="annotation2")
     with form2:
@@ -205,28 +211,29 @@ with tab2:
         progress_step = 1 / total_rows
         progress_value = 0
         for index, row in df.iterrows():
+            try:
+                progress_value += progress_step
+                my_bar.progress(progress_value,text=progress_text)
 
-            progress_value += progress_step
-            my_bar.progress(progress_value,text=progress_text)
+                email = row[column_name]
 
-            email = row[column_name]
+                domain = email.split('@')[1]
+                domain_valid = check_email_domain(domain)
 
-            domain = email.split('@')[1]
-            domain_valid = check_email_domain(domain)
-
-            email_valid = validate_email(email)
+                email_valid = validate_email(email)
 
 
-            if domain_valid == True and email_valid == True:
-                df.loc[index, "Domain"] = "Valid"
-                df.loc[index, "Valid Check"] = "Valid"
+                if domain_valid == True and email_valid == True:
+                    df.loc[index, "Domain"] = "Valid"
+                    df.loc[index, "Valid Check"] = "Valid"
 
-            elif domain_valid == True and email_valid == False:
-                df.loc[index, "Domain"] = "Valid"
-                df.loc[index, "Valid Check"] = "Invalid"
-            else:
-                df.loc[index, "Verification"] = "Invalid"
-
+                elif domain_valid == True and email_valid == False:
+                    df.loc[index, "Domain"] = "Valid"
+                    df.loc[index, "Valid Check"] = "Invalid"
+                else:
+                    df.loc[index, "Verification"] = "Invalid"
+            except:
+                continue
     form2 = st.form(key="annotation3")
     with form2:
 
