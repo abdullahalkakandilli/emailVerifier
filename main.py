@@ -61,26 +61,24 @@ with tab3:
     st.subheader('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
     st.text("To start, please write an _Email_.")
     def get_values(email):
-        try:
-            domain = email.split('@')[1]
-            domain_valid = check_email_domain(domain)
 
-            email_valid = validate_email(email)
+        domain = email.split('@')[1]
+        domain_valid = check_email_domain(domain)
+
+        email_valid = validate_email(email)
 
 
-            if domain_valid == True and email_valid == True:
-                result = "Domain is valid and email is validated"
-                return result
+        if domain_valid == True and email_valid == True:
+            result = "Domain is valid and email is validated"
+            return result
 
-            elif domain_valid == True and email_valid == False:
-                result = "Domain is valid and email is NOT validated"
-                return result
-            else:
-                result = "Domain is not valid and email is NOT validated"
-                return result
-        except:
+        elif domain_valid == True and email_valid == False:
+            result = "Domain is valid and email is NOT validated"
+            return result
+        else:
+            result = "Domain is not valid and email is NOT validated"
+            return result
 
-            st.error('Please enter a valid email!')
 
 
     form1 = st.form(key="annotation")
@@ -90,10 +88,11 @@ with tab3:
         submitted = st.form_submit_button(label="Submit")
 
     if submitted:
-
-        result = get_values(text)
-
-    st.info(result + " :star:")
+        try:
+            result = get_values(text)
+            st.info(result + " :star:")
+        except:
+            st.info(result + " :star:")
 
 with tab1:
     st.subheader('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
