@@ -92,7 +92,7 @@ with tab3:
             result = get_values(text)
             st.info(result + " :star:")
         except:
-            st.info(result + " :star:")
+            st.error("Please enter a valid email address")
 
 with tab1:
     st.subheader('Welcome to :blue[Sweephy] _Email Verifier_ :smiley:')
